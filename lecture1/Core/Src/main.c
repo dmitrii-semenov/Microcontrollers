@@ -95,8 +95,25 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t i = 0;
+  uint32_t sig = 0b10101001110111011100101010000000;
+  uint8_t a = 0;
+
   while (1)
   {
+	a = (sig >> i) & 1;
+	if (a == 1){
+		LL_GPIO_SetOutputPin(LD2_GPIO_Port, LD2_Pin);
+	} else {
+		LL_GPIO_ResetOutputPin(LD2_GPIO_Port, LD2_Pin);
+	}
+	LL_mDelay(200);
+
+	if (i<31) {
+		i++;
+	} else {
+		i = 0;
+	}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
