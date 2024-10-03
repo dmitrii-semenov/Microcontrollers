@@ -48,6 +48,7 @@
 
 /* USER CODE BEGIN PV */
 volatile uint32_t tick;
+static uint32_t off_time;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -75,7 +76,6 @@ static void blink() {
 
 static void button() {
 	static uint32_t last_button_tick;
-	static uint32_t off_time;
 
 
 	// Sampling button
@@ -106,6 +106,57 @@ static void button() {
 		LL_GPIO_ResetOutputPin(LED2_GPIO_Port, LED2_Pin);
 	}
 }
+
+static void button1() {
+	static uint32_t last_button_tick;
+
+
+	// Sampling button
+	if (tick > last_button_tick + BUTTON_TIME) {
+		last_button_tick = tick;
+
+		// Enter every 40ms
+		static uint32_t old_s1;
+		uint32_t new_s1 = LL_GPIO_IsInputPinSet(S1_GPIO_Port, S1_Pin);
+
+		if (old_s1 && !new_s1) { // falling edge
+			off_time = tick + LED_TIME_LONG;
+			LL_GPIO_SetOutputPin(LED2_GPIO_Port, LED2_Pin);
+		}
+		old_s1 = new_s1;
+	}
+
+	// LED disable
+	if (tick > off_time) {
+		LL_GPIO_ResetOutputPin(LED2_GPIO_Port, LED2_Pin);
+	}
+}
+
+static void button2() {
+	static uint32_t last_button_tick;
+
+
+	// Sampling button
+	if (tick > last_button_tick + BUTTON_TIME) {
+		last_button_tick = tick;
+
+		// Enter every 40ms
+		static uint32_t old_s2;
+		uint32_t new_s2 = LL_GPIO_IsInputPinSet(S2_GPIO_Port, S2_Pin);
+
+		if (old_s2 && !new_s2) { // falling edge
+			off_time = tick + LED_TIME_SHORT;
+			LL_GPIO_SetOutputPin(LED2_GPIO_Port, LED2_Pin);
+		}
+		old_s2 = new_s2;
+	}
+
+	// LED disable
+	if (tick > off_time) {
+		LL_GPIO_ResetOutputPin(LED2_GPIO_Port, LED2_Pin);
+	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -148,7 +199,9 @@ int main(void)
 	while (1)
 	{
 		blink();
-		button();
+		//button();
+		button1();
+		button2();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
