@@ -33,6 +33,7 @@
 /* USER CODE BEGIN PD */
 #define BLINK_TIME      	 300
 #define BUTTON_TIME      	  40
+#define S1_SAMPLE_TIME     	   5
 #define LED_TIME_SHORT   	 100
 #define LED_TIME_LONG   	1000
 
@@ -157,6 +158,31 @@ static void button2() {
 	}
 }
 
+static void button1_reg() {
+	static uint32_t last_button_tick;
+
+	// Sampling button
+	if (tick > last_button_tick + S1_SAMPLE_TIME) {
+
+		last_button_tick = tick;
+		// Enter every 5ms
+		static uint16_t debounce = 0xFFFF;
+
+		uint32_t read_s1 = LL_GPIO_IsInputPinSet(S1_GPIO_Port, S1_Pin);
+
+		if (read_s1 & 1) debounce = 0xFFFF;
+		else debounce = debounce << 1;
+		if (debounce == 0x8000) {
+			off_time = tick + LED_TIME_LONG;
+			LL_GPIO_SetOutputPin(LED2_GPIO_Port, LED2_Pin);
+		}
+
+		// LED disable
+		if (tick > off_time) {
+			LL_GPIO_ResetOutputPin(LED2_GPIO_Port, LED2_Pin);
+		}
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -200,7 +226,7 @@ int main(void)
 	{
 		blink();
 		//button();
-		button1();
+		button1_reg();
 		button2();
     /* USER CODE END WHILE */
 
