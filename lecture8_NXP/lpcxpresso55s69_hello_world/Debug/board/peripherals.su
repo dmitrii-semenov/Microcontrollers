@@ -1,0 +1,5 @@
+C:\Users\240689\git\Microcontrollers\lpcxpresso55s69_hello_world\drivers/fsl_ctimer.h:379:20:CTIMER_EnableInterrupts	16	static
+../board/peripherals.c:139:13:CTIMER1_init	8	static
+../board/peripherals.c:195:13:CTIMER2_init	16	static
+../board/peripherals.c:208:6:BOARD_InitPeripherals	8	static
+../board/peripherals.c:218:6:BOARD_InitBootPeripherals	8	static
