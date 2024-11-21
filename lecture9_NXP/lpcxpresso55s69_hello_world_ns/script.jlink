@@ -1,0 +1,7 @@
+ExitOnError 1
+r
+h
+loadfile "C:\Users\240689\git\Microcontrollers\lecture9_NXP\lpcxpresso55s69_hello_world_ns\Debug\lpcxpresso55s69_hello_world_ns.hex" 0x10000 
+qc
+
+qc
