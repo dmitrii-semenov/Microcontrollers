@@ -1,2 +1,4 @@
 Overview of lecture contents:
-1) 
+1   Units used:
+    Initialization:
+    Functions:
