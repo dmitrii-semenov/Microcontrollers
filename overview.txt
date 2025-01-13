@@ -1,4 +1,28 @@
+ALWAYS CHECK INITIALIZATION PART! If led display is enabled, sct_init()!
+INIT goes to USER CODE 2
+
 Overview of lecture contents:
-1   Units used:
-    Initialization:
-    Functions:
+
+2   Units used: LED blinking, bouncing buttons
+    Initialization: LED1 -> PA4; LED2 -> PB0, S1 -> PC1 + pullup; S2 -> PC0 + pullup;
+    Functions: LL button debounce, LL blink
+
+3   Units used: Rotary encoder, 7-segment displays,
+    Initialization: SCT_NLA -> PB5; SCT_SDI -> PB4; SCT_CLK -> PB3; SCT_NOE -> PB10; 
+    Functions: HAL sct library for numbers display
+
+4   Units used: ADC and conversion, 7-segment displays, internal temperature sensor, FSM
+    Initialization: SCT_NLA -> PB5; SCT_SDI -> PB4; SCT_CLK -> PB3; SCT_NOE -> PB10; S1 -> PC1 + pullup; S2 -> PC0 + pullup;
+    Functions: HAL sct library for numbers display + leds above, HAL register debouncer with FSM, ADC processing
+
+5   Units used: UART, EEPROM
+    Initialization: LED1 -> PA4; LED2 -> PB0
+    Functions: text protocol commands via UART
+
+6   Units used: NTC temperature sensor, DS18B20 temperature sensor, ADC
+    Initialization: LED1 -> PA4; LED2 -> PB0, S1 -> PC1 + pullup; S2 -> PC0 + pullup;
+    Functions: HAL sct library for numbers display + leds above, HAL register debouncer with FSM, 1-wire interface
+
+7   Units used: FreeRTOS
+    Initialization: LED1 -> PA4; LED2 -> PB0, push-pull output??
+    Functions: FreeRTOS
