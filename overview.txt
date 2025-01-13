@@ -19,7 +19,7 @@ Overview of lecture contents:
     Initialization: LED1 -> PA4; LED2 -> PB0
     Functions: text protocol commands via UART
 
-6   Units used: NTC temperature sensor, DS18B20 temperature sensor, ADC
+6   Units used: NTC temperature sensor, DS18B20 temperature sensor, ADC, FSM
     Initialization: LED1 -> PA4; LED2 -> PB0, S1 -> PC1 + pullup; S2 -> PC0 + pullup;
     Functions: HAL sct library for numbers display + leds above, HAL register debouncer with FSM, 1-wire interface
 
